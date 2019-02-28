@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 import template.Solver;
@@ -24,17 +25,44 @@ public class PizzaSolver2 extends Solver {
 
 		List<Photo> Vphotos = problem.photos.stream().filter(x -> x.orientation == Orientation.V)
 				.collect(Collectors.toList());
-		
-		// TODO: EY idea merge photos with small intersect.
-
 		assert Vphotos.size() % 2 == 0;
+		// sort by number of tags (high to small9
+		/*
+		 * Vphotos.sort(new Comparator<Photo>() {
+		 * 
+		 * @Override public int compare(Photo o1, Photo o2) { return
+		 * Integer.compare(o1.tags.size(), o2.tags.size()); } });
+		 */
+
+		// TODO: EY idea merge photos with small intersect.
+		System.out.println("traversing V photos");
+		List<Photo> vPhotoCopy = new ArrayList<Photo>(Vphotos);
 		List<Slide> Vslides = new ArrayList<Slide>();
-		for (int i = 0; i < Vphotos.size(); i += 2) {
-			Photo a = Vphotos.get(i);
-			Photo b = Vphotos.get(i + 1);
-			Slide slide = new Slide(Arrays.asList(a, b));
-			Vslides.add(slide);
+		while (!vPhotoCopy.isEmpty()) {
+			Photo p1 = vPhotoCopy.get(0);
+			System.out.println("looking at photo " + p1.id);
+			vPhotoCopy.remove(0);
+			int currentIntersect = Integer.MAX_VALUE;
+			Photo p2 = vPhotoCopy.get(new Random().nextInt(vPhotoCopy.size()));
+			for (int i = 0; i < 50; i++) {
+				Photo p3 = vPhotoCopy.get(new Random().nextInt(vPhotoCopy.size()));
+				List<String> intersect = new ArrayList<String>(p1.tags);
+				intersect.retainAll(p3.tags);
+				if (intersect.size() / (p1.tags.size() + p3.tags.size()) < currentIntersect) {
+					p2 = p3;
+					currentIntersect = intersect.size();
+				}
+			}
+			Slide s = new Slide(Arrays.asList(p1, p2));
+			vPhotoCopy.remove(p2);
+			Vslides.add(s);
 		}
+
+		/*
+		 * List<Slide> Vslides = new ArrayList<Slide>(); for (int i = 0; i <
+		 * Vphotos.size(); i += 2) { Photo a = Vphotos.get(i); Photo b = Vphotos.get(i +
+		 * 1); Slide slide = new Slide(Arrays.asList(a, b)); Vslides.add(slide); }
+		 */
 
 		PizzaSolution sol = new PizzaSolution();
 		List<Slide> slides = new ArrayList<Slide>(Vslides);
@@ -45,7 +73,7 @@ public class PizzaSolver2 extends Solver {
 		int score = sol.score();
 		int maxScore = score;
 		System.out.println(score);
-		while (score <= 100000) {
+		while (score <= 120924) {
 			Collections.shuffle(slides);
 			score = sol.score();
 			if (score > maxScore) {
