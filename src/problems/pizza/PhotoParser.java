@@ -35,7 +35,7 @@ public class PhotoParser extends Parser {
 				Photo photo = new Photo();
 				photo.id = i;
 
-				if (parts[0] == "H") {
+				if ("H".equals(parts[0])) {
 					photo.orientation = Orientation.H;
 				} else {
 					photo.orientation = Orientation.V;
@@ -43,8 +43,8 @@ public class PhotoParser extends Parser {
 
 				int no = Integer.parseInt(parts[1]);
 
-				for (i = 2; i < no + 2; i++) {
-					photo.tags.add(parts[i]);
+				for (int j = 2; j < no + 2; j++) {
+					photo.tags.add(parts[j]);
 				}
 
 				photos.add(photo);
@@ -60,8 +60,8 @@ public class PhotoParser extends Parser {
 
 	private void parseHeader(String line) throws ParserException {
 		String[] strParts = line.split(headerDelimeter);
-		if (strParts.length != 4) {
-			throw new ParserException("Header row must contain 4 ints");
+		if (strParts.length != 1) {
+			throw new ParserException("Header row must contain 1 ints");
 		}
 
 		try {

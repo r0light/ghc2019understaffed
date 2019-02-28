@@ -15,7 +15,7 @@ public class PizzaMain {
 	public static void main(String[] args) throws Exception {
 
 		Map<String, String> inputOutputFiles = new HashMap<String, String>();
-		inputOutputFiles.put("problems/pizza/a_example.in", "problems/pizza/a_example.out");
+		inputOutputFiles.put("problems/pizza/a_example.txt", "problems/pizza/a_example.out");
 		/*-
 		inputOutputFiles.put("problems/pizza/b_small.in", "problems/pizza/b_small.out");
 		inputOutputFiles.put("problems/pizza/c_medium.in", "problems/pizza/c_medium.out");
