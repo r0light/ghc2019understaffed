@@ -3,8 +3,9 @@ package problems.pizza;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 import template.Solver;
 
@@ -19,7 +20,21 @@ public class PizzaSolver extends Solver {
 		
 		candidates.stream().forEach(System.out::println);
 		
+		Map<String, List<Slide>> distribution = new HashMap<>();
 		
+		for ( Slide s : candidates ) {
+			for ( String tag : s.tags ) {
+				if (distribution.containsKey(tag)) {
+					distribution.get(tag).add(s);
+				} else {
+					List<Slide> ss = new ArrayList<Slide>();
+					slides.add(s);
+					distribution.put(tag, ss);
+				}
+			}
+		}
+		
+		System.out.println(distribution);
 
 		// TODO This is only a hard coded solution for a_example.in problem
 		PizzaSolution solution = new PizzaSolution();
