@@ -19,15 +19,18 @@ public class PizzaSolver2 extends Solver {
 		PizzaSolution sol = new PizzaSolution();
 		sol.slides = slides;
 
+		int score = 0;
 		Slide last = null;
 		for (Slide s : sol.slides) {
 			if (last == null) {
 				last = s;
 				continue;
 			}
-			System.out.println(Eval.score(last, s));
+			int newScore = Eval.score(last, s);
+			score += newScore;
 			last = s;
 		}
+		System.out.println("SCORE: " + score);
 
 		return sol;
 	}
