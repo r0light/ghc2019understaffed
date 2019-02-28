@@ -29,6 +29,7 @@ public class PizzaMain {
 		final PizzaSolver2 solver = new PizzaSolver2();
 		final PizzaSolution solution = solver.solve(problem);
 		final Writer writer = new PizzaWriter();
+		System.out.println("before writing . . . ");
 		writer.write(solution, output);
 		System.out.println(String.format("%s => %s", input, output));
 		System.out.println(solution.score());
