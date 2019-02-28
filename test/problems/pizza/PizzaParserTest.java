@@ -21,7 +21,7 @@ public class PizzaParserTest {
 	final int maxCells = 6;
 
 	// WHEN
-	final PizzaProblem problem = new PizzaParser().parse(Paths.get(filename));
+	final PhotoProblem problem = new PhotoParser().parse(Paths.get(filename));
 
 	// THEN
 	assertEquals(rows, problem.rows);
@@ -42,7 +42,7 @@ public class PizzaParserTest {
 	final int maxCells = 5;
 
 	// WHEN
-	final PizzaProblem problem = new PizzaParser().parse(Paths.get(filename));
+	final PhotoProblem problem = new PhotoParser().parse(Paths.get(filename));
 
 	// THEN
 	assertEquals(rows, problem.rows);
@@ -63,7 +63,7 @@ public class PizzaParserTest {
 	final int maxCells = 12;
 
 	// WHEN
-	final PizzaProblem problem = new PizzaParser().parse(Paths.get(filename));
+	final PhotoProblem problem = new PhotoParser().parse(Paths.get(filename));
 
 	// THEN
 	assertEquals(rows, problem.rows);
@@ -84,7 +84,7 @@ public class PizzaParserTest {
 	final int maxCells = 14;
 
 	// WHEN
-	final PizzaProblem problem = new PizzaParser().parse(Paths.get(filename));
+	final PhotoProblem problem = new PhotoParser().parse(Paths.get(filename));
 
 	// THEN
 	assertEquals(rows, problem.rows);

@@ -6,7 +6,7 @@ import template.Solver;
 
 public class PizzaSolver extends Solver {
 
-    public PizzaSolution solve(PizzaProblem problem) {
+    public PizzaSolution solve(PhotoProblem problem) {
 
 	// TODO This is only a hard coded solution for a_example.in problem
 	PizzaSolution solution = new PizzaSolution();

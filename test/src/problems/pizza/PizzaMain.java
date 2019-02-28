@@ -27,7 +27,7 @@ public class PizzaMain {
 			for (String key : inputOutputFiles.keySet()) {
 				final Path input = Paths.get(key);
 				final Path output = Paths.get(inputOutputFiles.get(key));
-				final PizzaProblem problem = new PizzaParser().parse(input);
+				final PhotoProblem problem = new PhotoParser().parse(input);
 				final PizzaSolver solver = new PizzaSolver();
 				final Runnable runnable = new Runnable() {
 

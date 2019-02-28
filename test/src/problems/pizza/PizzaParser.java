@@ -14,11 +14,11 @@ public class PizzaParser extends Parser {
 
 	final static String headerDelimeter = " ";
 	Path path;
-	PizzaProblem problem;
+	PhotoProblem problem;
 
-	public PizzaProblem parse(Path path) throws ParserException {
+	public PhotoProblem parse(Path path) throws ParserException {
 		this.path = path;
-		problem = new PizzaProblem();
+		problem = new PhotoProblem();
 
 		List<String> lines;
 		try {
