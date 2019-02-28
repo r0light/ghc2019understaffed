@@ -7,13 +7,17 @@ import template.Solution;
 
 public class PizzaSolution extends Solution {
 
-    int numberOfSlices;
-    List<String> slices;
+	List<Slide> slides;
 
-    @Override
-    public String provideSolution() {
-	final String output = numberOfSlices + "\n" + slices.stream().collect(Collectors.joining("\n"));
-	return output;
-    }
+	@Override
+	public String provideSolution() {
+		String output = slides.size() + "";
+		output += "\n";
+		for (Slide s : slides) {
+			output += s.photos.stream().map(x -> "" + x.id).collect(Collectors.joining(" "));
+			output += "\n";
+		}
+		return output;
+	}
 
 }
