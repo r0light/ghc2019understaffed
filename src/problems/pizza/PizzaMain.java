@@ -14,7 +14,7 @@ public class PizzaMain {
 		final Path output = Paths.get("problems/pizza/b_lovely_landscapes.out");
 
 		final PhotoProblem problem = new PhotoParser().parse(input);
-		final PizzaSolver2 solver = new PizzaSolver2();
+		final PizzaSolver solver = new PizzaSolver();
 		final PizzaSolution solution = solver.solve(problem);
 		final Writer writer = new PizzaWriter();
 		writer.write(solution, output);

@@ -20,4 +20,19 @@ public class PizzaSolution extends Solution {
 		return output;
 	}
 
+	public int score() {
+		int score = 0;
+		Slide last = null;
+		for (Slide s : slides) {
+			if (last == null) {
+				last = s;
+				continue;
+			}
+			int newScore = Eval.score(last, s);
+			score += newScore;
+			last = s;
+		}
+		System.out.println("SCORE: " + score);
+		return score;
+	}
 }

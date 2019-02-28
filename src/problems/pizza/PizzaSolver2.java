@@ -12,7 +12,7 @@ public class PizzaSolver2 extends Solver {
 		List<Slide> slides = problem.photos.stream().map(x -> {
 			List<Photo> photos = new ArrayList<Photo>();
 			photos.add(x);
-			Slide s = new Slide(photos, null);
+			Slide s = new Slide(photos);
 			return s;
 		}).collect(Collectors.toList());
 
