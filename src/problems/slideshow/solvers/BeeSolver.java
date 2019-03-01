@@ -2,13 +2,10 @@ package problems.slideshow.solvers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.OptionalDouble;
-import java.util.OptionalInt;
 import java.util.stream.Collectors;
 
 import problems.slideshow.Orientation;
@@ -20,11 +17,11 @@ import template.Solver;
 
 public class BeeSolver extends Solver implements SlideshowSolver {
 
-	final int LOOKAHEAD = 200;
+	final int LOOKAHEAD = 1;
 
 	public SlideshowSolution solve(SlideshowProblem problem) {
 
-		assert problem.photos.parallelStream().filter(s -> s.orientation == Orientation.V).count() == 0;
+		System.out.println("Number of V photos: "+problem.photos.parallelStream().filter(s -> s.orientation == Orientation.V).count());
 
 		// turn all H photos into slides
 		List<Slide> slides = problem.photos.parallelStream().filter(x -> x.orientation == Orientation.H)
@@ -75,30 +72,13 @@ public class BeeSolver extends Solver implements SlideshowSolver {
 			}
 			if (bestCandidate == null || slide == bestCandidate) {
 				bestCandidate = slides.get(0);
-				// finalSlides.add(bestCandidate);
-				// continue;
 			}
 
 			finalSlides.add(bestCandidate);
 			slides.remove(bestCandidate);
-//			System.out.println("removing " + bestCandidate);
-//				bestCandidate.tags.forEach(tag -> tag2slides.get(tag).remove(bestCandidate));
 			slide = bestCandidate;
 		}
 
-		/*
-		 * int counter = 0; for (String tag : tag2slides.keySet()) {
-		 * System.out.println(counter + " of " + tag2slides.keySet().size()); counter +=
-		 * 1; List<Slide> slidesWithTag = tag2slides.get(tag); if (slidesWithTag.size()
-		 * <= 1) { // later on I need to find a way to properly combine lists of Slides
-		 * continue; } finalSlides.addAll(SlideshowHelper.copyList(slidesWithTag)); //
-		 * tag2slides.values().parallelStream().forEach(x -> //
-		 * x.removeAll(slidesWithTag)); }
-		 */
-		// remove duplicates (remove them from the end first, leave the first occurence)
-		Collections.reverse(finalSlides);
-		finalSlides = finalSlides.stream().distinct().collect(Collectors.toList());
-		Collections.reverse(finalSlides);
 		System.out.println("SIZE: " + finalSlides.size());
 		return new SlideshowSolution(finalSlides);
 
