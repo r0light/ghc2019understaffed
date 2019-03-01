@@ -8,10 +8,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import javax.swing.plaf.basic.BasicSliderUI.ScrollListener;
-
-import com.sun.org.apache.xml.internal.security.utils.HelperNodeList;
-
 import problems.slideshow.Orientation;
 import problems.slideshow.Photo;
 import problems.slideshow.Slide;
@@ -24,8 +20,8 @@ public class SlideshowSolver2 extends Solver implements SlideshowSolver {
 
 	public SlideshowSolution solve(SlideshowProblem problem) {
 
-		final int inspectVnextElements = 25;
-		final int inspectnextSlides = 50;
+		final int inspectVnextElements = 20;
+		final int inspectnextSlides = 100;
 
 		// turn all H photos into slides
 		List<Slide> Hslides = problem.photos.stream().filter(x -> x.orientation == Orientation.H).map(x -> {
@@ -50,7 +46,9 @@ public class SlideshowSolver2 extends Solver implements SlideshowSolver {
 				Photo somePartner = Vphotos.get(new Random().nextInt(Vphotos.size()));
 				List<String> intersect = new ArrayList<String>(photo.tags);
 				intersect.retainAll(somePartner.tags);
-				if (intersect.size() / (photo.tags.size() * somePartner.tags.size()) < currentIntersect) {
+				// if (intersect.size() / (photo.tags.size() * somePartner.tags.size()) <
+				// currentIntersect) {
+				if (intersect.size() < currentIntersect) {
 					bestPartner = somePartner;
 					currentIntersect = intersect.size();
 				}
