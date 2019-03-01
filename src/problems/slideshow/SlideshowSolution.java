@@ -9,6 +9,13 @@ public class SlideshowSolution extends Solution {
 
 	public List<Slide> slides;
 
+	public SlideshowSolution(List<Slide> slides) {
+		this.slides = slides;
+	}
+
+	public SlideshowSolution() {
+	}
+
 	@Override
 	public String provideSolution() {
 		String output = slides.size() + "";
@@ -21,18 +28,6 @@ public class SlideshowSolution extends Solution {
 	}
 
 	public int score() {
-		int score = 0;
-		Slide last = null;
-		for (Slide s : slides) {
-			if (last == null) {
-				last = s;
-				continue;
-			}
-			int newScore = SlideshowHelper.score(last, s);
-			score += newScore;
-			last = s;
-		}
-		// System.out.println("SCORE: " + score);
-		return score;
+		return SlideshowHelper.score(slides);
 	}
 }
