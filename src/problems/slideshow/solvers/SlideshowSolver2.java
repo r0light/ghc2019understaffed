@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 import problems.slideshow.Orientation;
@@ -20,11 +19,11 @@ public class SlideshowSolver2 extends Solver implements SlideshowSolver {
 
 	public SlideshowSolution solve(SlideshowProblem problem) {
 
-		final int inspectVnextElements = 20;
-		final int inspectnextSlides = 100;
+		final int inspectVnextElements = 140;
+		final int inspectnextSlides = 220;
 
 		// turn all H photos into slides
-		List<Slide> Hslides = problem.photos.stream().filter(x -> x.orientation == Orientation.H).map(x -> {
+		List<Slide> Hslides = problem.photos.parallelStream().filter(x -> x.orientation == Orientation.H).map(x -> {
 			List<Photo> photos = new ArrayList<Photo>();
 			photos.add(x);
 			Slide s = new Slide(photos);
@@ -32,9 +31,16 @@ public class SlideshowSolver2 extends Solver implements SlideshowSolver {
 		}).collect(Collectors.toList());
 
 		// turn all V photos into slides
-		List<Photo> Vphotos = problem.photos.stream().filter(x -> x.orientation == Orientation.V)
+		List<Photo> Vphotos = problem.photos.parallelStream().filter(x -> x.orientation == Orientation.V)
 				.collect(Collectors.toList());
 		assert Vphotos.size() % 2 == 0;
+		// sort Vphotos by the number of tags
+		Vphotos.sort(new Comparator<Photo>() {
+			@Override
+			public int compare(Photo o1, Photo o2) {
+				return Integer.compare(o2.tags.size(), o1.tags.size());
+			}
+		});
 
 		// two V photos are a good match if they
 		List<Slide> Vslides = new ArrayList<Slide>();
@@ -43,12 +49,10 @@ public class SlideshowSolver2 extends Solver implements SlideshowSolver {
 			int currentIntersect = Integer.MAX_VALUE;
 			Photo bestPartner = Vphotos.get(0);
 			for (int i = 0; i < inspectVnextElements && i < Vphotos.size(); i++) {
-				Photo somePartner = Vphotos.get(new Random().nextInt(Vphotos.size()));
+				Photo somePartner = Vphotos.get(i);
 				List<String> intersect = new ArrayList<String>(photo.tags);
 				intersect.retainAll(somePartner.tags);
-				// if (intersect.size() / (photo.tags.size() * somePartner.tags.size()) <
-				// currentIntersect) {
-				if (intersect.size() < currentIntersect) {
+				if (intersect.size() / (photo.tags.size() + somePartner.tags.size()) < currentIntersect) {
 					bestPartner = somePartner;
 					currentIntersect = intersect.size();
 				}
@@ -70,9 +74,6 @@ public class SlideshowSolver2 extends Solver implements SlideshowSolver {
 				return Integer.compare(arg0.tags.size(), arg1.tags.size());
 			}
 		});
-		// 460k without sort (inspectnextSlides=5)
-		// 513k with sort (inspectnextSlides=5)
-		// 631k with sort and inspectnextSlides=25
 
 		List<Slide> finalSlides = new ArrayList<Slide>();
 		Slide slide = slides.remove(0);
