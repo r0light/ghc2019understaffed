@@ -3,7 +3,6 @@ package problems.slideshow.solvers;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +20,7 @@ public class SlideshowSolver3 extends Solver implements SlideshowSolver {
 	public SlideshowSolution solve(SlideshowProblem problem) {
 
 		// create List of slides
-		List<Slide> slides = new ArrayList<>();
+		// List<Slide> slides = new ArrayList<>();
 
 		List<Slide> candidates = this.createSlides(problem.photos);
 

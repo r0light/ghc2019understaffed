@@ -19,7 +19,7 @@ public class SlideshowSolver1 extends Solver implements SlideshowSolver {
 	public SlideshowSolution solve(SlideshowProblem problem) {
 
 		// create List of slides
-		List<Slide> slides = new ArrayList<>();
+		// List<Slide> slides = new ArrayList<>();
 
 		List<Slide> candidates = this.createSlides(problem.photos);
 

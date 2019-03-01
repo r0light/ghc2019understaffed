@@ -18,10 +18,8 @@ public class SlideshowSolver2 extends Solver implements SlideshowSolver {
 
 	public SlideshowSolution solve(SlideshowProblem problem) {
 
-		List<Photo> Hphotos = problem.photos.stream().filter(x -> x.orientation == Orientation.H)
-				.collect(Collectors.toList());
-
-		List<Slide> Hslides = Hphotos.stream().map(x -> {
+		// turn all H photos into slides
+		List<Slide> Hslides = problem.photos.stream().filter(x -> x.orientation == Orientation.H).map(x -> {
 			List<Photo> photos = new ArrayList<Photo>();
 			photos.add(x);
 			Slide s = new Slide(photos);
@@ -31,21 +29,11 @@ public class SlideshowSolver2 extends Solver implements SlideshowSolver {
 		List<Photo> Vphotos = problem.photos.stream().filter(x -> x.orientation == Orientation.V)
 				.collect(Collectors.toList());
 		assert Vphotos.size() % 2 == 0;
-		// sort by number of tags (high to small9
-		/*
-		 * Vphotos.sort(new Comparator<Photo>() {
-		 * 
-		 * @Override public int compare(Photo o1, Photo o2) { return
-		 * Integer.compare(o1.tags.size(), o2.tags.size()); } });
-		 */
 
-		// TODO: EY idea merge photos with small intersect.
-		// System.out.println("traversing V photos");
 		List<Photo> vPhotoCopy = new ArrayList<Photo>(Vphotos);
 		List<Slide> Vslides = new ArrayList<Slide>();
 		while (!vPhotoCopy.isEmpty()) {
 			Photo p1 = vPhotoCopy.get(0);
-			// System.out.println("looking at photo " + p1.id);
 			vPhotoCopy.remove(0);
 			int currentIntersect = Integer.MAX_VALUE;
 			Photo p2 = vPhotoCopy.get(new Random().nextInt(vPhotoCopy.size()));
@@ -63,18 +51,12 @@ public class SlideshowSolver2 extends Solver implements SlideshowSolver {
 			Vslides.add(s);
 		}
 
-		/*
-		 * List<Slide> Vslides = new ArrayList<Slide>(); for (int i = 0; i <
-		 * Vphotos.size(); i += 2) { Photo a = Vphotos.get(i); Photo b = Vphotos.get(i +
-		 * 1); Slide slide = new Slide(Arrays.asList(a, b)); Vslides.add(slide); }
-		 */
-
 		SlideshowSolution sol = new SlideshowSolution();
 		List<Slide> slides = new ArrayList<Slide>(Vslides);
 		Collections.copy(slides, Vslides);
 		slides.addAll(Hslides);
 		sol.slides = slides;
-		Collections.shuffle(slides);
+
 		return sol;
 	}
 }
