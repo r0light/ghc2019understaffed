@@ -63,7 +63,7 @@ public class SingleSolverAllProblems {
 		while (!executor.isTerminated()) {
 			try {
 				executor.shutdown();
-				executor.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS);
+				executor.awaitTermination(100, TimeUnit.MILLISECONDS);
 			} catch (InterruptedException ignore) {
 			}
 		}

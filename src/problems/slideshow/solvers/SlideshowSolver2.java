@@ -19,8 +19,8 @@ public class SlideshowSolver2 extends Solver implements SlideshowSolver {
 
 	public SlideshowSolution solve(SlideshowProblem problem) {
 
-		final int inspectVnextElements = 140;
-		final int inspectnextSlides = 220;
+		final int inspectVnextElements = 50; // 400
+		final int inspectnextSlides = 10; // 2000
 
 		// turn all H photos into slides
 		List<Slide> Hslides = problem.photos.parallelStream().filter(x -> x.orientation == Orientation.H).map(x -> {
@@ -52,7 +52,9 @@ public class SlideshowSolver2 extends Solver implements SlideshowSolver {
 				Photo somePartner = Vphotos.get(i);
 				List<String> intersect = new ArrayList<String>(photo.tags);
 				intersect.retainAll(somePartner.tags);
-				if (intersect.size() / (photo.tags.size() + somePartner.tags.size()) < currentIntersect) {
+				// if (intersect.size() / (photo.tags.size() + somePartner.tags.size()) <
+				// currentIntersect) {
+				if (intersect.size() < currentIntersect) {
 					bestPartner = somePartner;
 					currentIntersect = intersect.size();
 				}
@@ -80,12 +82,12 @@ public class SlideshowSolver2 extends Solver implements SlideshowSolver {
 		finalSlides.add(slide);
 		while (!slides.isEmpty()) {
 			Slide bestSlide = slides.get(0);
-			int bestScore = SlideshowHelper.score(slide, bestSlide);
+			int bestScore = SlideshowHelper.scoreX(slide, bestSlide);
 			for (int i = 0; i < inspectnextSlides && i < slides.size(); i++) {
 				Slide someSlide = slides.get(i);
-				if (SlideshowHelper.score(slide, someSlide) > bestScore) {
+				if (SlideshowHelper.scoreX(slide, someSlide) > bestScore) {
 					bestSlide = someSlide;
-					bestScore = SlideshowHelper.score(slide, someSlide);
+					bestScore = SlideshowHelper.scoreX(slide, someSlide);
 				}
 			}
 			slides.remove(bestSlide);
