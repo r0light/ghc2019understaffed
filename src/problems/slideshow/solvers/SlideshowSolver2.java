@@ -1,4 +1,4 @@
-package problems.pizza;
+package problems.slideshow.solvers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,11 +7,16 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+import problems.slideshow.Orientation;
+import problems.slideshow.Photo;
+import problems.slideshow.Slide;
+import problems.slideshow.SlideshowProblem;
+import problems.slideshow.SlideshowSolution;
 import template.Solver;
 
-public class PizzaSolver2 extends Solver {
+public class SlideshowSolver2 extends Solver implements SlideshowSolver {
 
-	public PizzaSolution solve(PhotoProblem problem) {
+	public SlideshowSolution solve(SlideshowProblem problem) {
 
 		List<Photo> Hphotos = problem.photos.stream().filter(x -> x.orientation == Orientation.H)
 				.collect(Collectors.toList());
@@ -35,12 +40,12 @@ public class PizzaSolver2 extends Solver {
 		 */
 
 		// TODO: EY idea merge photos with small intersect.
-		System.out.println("traversing V photos");
+		// System.out.println("traversing V photos");
 		List<Photo> vPhotoCopy = new ArrayList<Photo>(Vphotos);
 		List<Slide> Vslides = new ArrayList<Slide>();
 		while (!vPhotoCopy.isEmpty()) {
 			Photo p1 = vPhotoCopy.get(0);
-			System.out.println("looking at photo " + p1.id);
+			// System.out.println("looking at photo " + p1.id);
 			vPhotoCopy.remove(0);
 			int currentIntersect = Integer.MAX_VALUE;
 			Photo p2 = vPhotoCopy.get(new Random().nextInt(vPhotoCopy.size()));
@@ -64,25 +69,12 @@ public class PizzaSolver2 extends Solver {
 		 * 1); Slide slide = new Slide(Arrays.asList(a, b)); Vslides.add(slide); }
 		 */
 
-		PizzaSolution sol = new PizzaSolution();
+		SlideshowSolution sol = new SlideshowSolution();
 		List<Slide> slides = new ArrayList<Slide>(Vslides);
 		Collections.copy(slides, Vslides);
 		slides.addAll(Hslides);
 		sol.slides = slides;
-
-		int score = sol.score();
-		int maxScore = score;
-		System.out.println(score);
-		while (score <= 120924) {
-			Collections.shuffle(slides);
-			score = sol.score();
-			if (score > maxScore) {
-				maxScore = score;
-			}
-			System.out.println("SCORE: " + score + "--max so far: " + maxScore);
-		}
-		System.out.println("DONE");
-
+		Collections.shuffle(slides);
 		return sol;
 	}
 }

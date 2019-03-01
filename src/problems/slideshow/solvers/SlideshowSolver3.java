@@ -1,17 +1,24 @@
-package problems.pizza;
+package problems.slideshow.solvers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import problems.slideshow.Orientation;
+import problems.slideshow.Photo;
+import problems.slideshow.Slide;
+import problems.slideshow.SlideshowProblem;
+import problems.slideshow.SlideshowSolution;
 import template.Solver;
 
-public class PizzaSolver extends Solver {
+public class SlideshowSolver3 extends Solver implements SlideshowSolver {
 
-	public PizzaSolution solve(PhotoProblem problem) {
+	public SlideshowSolution solve(SlideshowProblem problem) {
 
 		// create List of slides
 		List<Slide> slides = new ArrayList<>();
@@ -36,7 +43,7 @@ public class PizzaSolver extends Solver {
 
 		List<Slide> solutionSlides = new ArrayList<Slide>();
 
-		System.out.println(distribution.size());
+//		System.out.println(distribution.size());
 		// removing all the tags with a single slide
 		List<String> singleTags = new ArrayList<>();
 		for (String tag : distribution.keySet()) {
@@ -47,7 +54,7 @@ public class PizzaSolver extends Solver {
 		for (String removeTag : singleTags) {
 			distribution.remove(removeTag);
 		}
-		System.out.println(distribution.size());
+//		System.out.println(distribution.size());
 
 		// Search start tag
 		// TODO: randomize
@@ -75,18 +82,18 @@ public class PizzaSolver extends Solver {
 				neighbour = takeFromDistribution(distribution, currentTag);
 			}
 			distribution.remove(currentTag);
-			System.out.println("size: " + distribution.size());
+//			System.out.println("size: " + distribution.size());
 			currentTag = findTagWithPair(distribution);
 		}
 
 		// TODO This is only a hard coded solution for a_example.in problem
-		PizzaSolution solution = new PizzaSolution();
+		SlideshowSolution solution = new SlideshowSolution();
 		solution.slides = solutionSlides;
 		solution.score();
 		// solution.numberOfSlices = 3;
 		// solution.slices = Arrays.asList("0 0 2 1", "0 2 2 2", "0 3 2 4");
 
-		System.out.println(problem.toString());
+//		System.out.println(problem.toString());
 
 		return solution;
 	}
@@ -142,6 +149,15 @@ public class PizzaSolver extends Solver {
 	private Collection<? extends Slide> getSlidesFromVerticals(List<Photo> verticals) {
 
 		List<Slide> slides = new ArrayList<Slide>();
+
+		// Collections.shuffle(verticals);
+		verticals.sort(new Comparator<Photo>() {
+
+			@Override
+			public int compare(Photo o1, Photo o2) {
+				return Integer.compare(o1.tags.size(), o2.tags.size());
+			}
+		});
 
 		for (int i = 0; i < verticals.size() - 1; i += 2) {
 			slides.add(new Slide(Arrays.asList(verticals.get(i), verticals.get(i + 1))));

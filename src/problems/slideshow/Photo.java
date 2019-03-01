@@ -1,4 +1,4 @@
-package problems.pizza;
+package problems.slideshow;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,6 @@ public class Photo {
 
 	public Photo() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Photo(int id, Orientation orientation, List<String> tags) {
@@ -23,7 +22,7 @@ public class Photo {
 
 	@Override
 	public String toString() {
-		return "" + id;
+		return String.format("%d", id);
 	}
 
 }

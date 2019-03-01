@@ -1,10 +1,10 @@
-package problems.pizza;
+package problems.slideshow;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Eval {
+public class SlideshowHelper {
 
 	public static int score(Slide s1, Slide s2) {
 		List<String> tags1 = new ArrayList<String>(s1.tags);

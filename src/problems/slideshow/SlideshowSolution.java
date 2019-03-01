@@ -1,13 +1,13 @@
-package problems.pizza;
+package problems.slideshow;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import template.Solution;
 
-public class PizzaSolution extends Solution {
+public class SlideshowSolution extends Solution {
 
-	List<Slide> slides;
+	public List<Slide> slides;
 
 	@Override
 	public String provideSolution() {
@@ -28,11 +28,11 @@ public class PizzaSolution extends Solution {
 				last = s;
 				continue;
 			}
-			int newScore = Eval.score(last, s);
+			int newScore = SlideshowHelper.score(last, s);
 			score += newScore;
 			last = s;
 		}
-		System.out.println("SCORE: " + score);
+		// System.out.println("SCORE: " + score);
 		return score;
 	}
 }

@@ -1,4 +1,4 @@
-package problems.pizza;
+package problems.slideshow;
 
 import java.util.ArrayList;
 import java.util.List;

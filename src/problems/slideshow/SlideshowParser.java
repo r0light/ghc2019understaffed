@@ -1,4 +1,4 @@
-package problems.pizza;
+package problems.slideshow;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -11,15 +11,15 @@ import java.util.List;
 import template.Parser;
 import template.ParserException;
 
-public class PhotoParser extends Parser {
+public class SlideshowParser extends Parser {
 
 	final static String headerDelimeter = " ";
 	Path path;
-	PhotoProblem problem;
+	SlideshowProblem problem;
 
-	public PhotoProblem parse(Path path) throws ParserException {
+	public SlideshowProblem parse(Path path) throws ParserException {
 		this.path = path;
-		problem = new PhotoProblem();
+		problem = new SlideshowProblem();
 
 		List<String> lines;
 		try {

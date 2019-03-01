@@ -1,4 +1,4 @@
-package problems.pizza;
+package problems.slideshow;
 
 public enum Orientation {
 

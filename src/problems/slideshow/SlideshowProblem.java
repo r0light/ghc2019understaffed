@@ -1,20 +1,20 @@
-package problems.pizza;
+package problems.slideshow;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import template.Problem;
 
-public class PhotoProblem extends Problem {
+public class SlideshowProblem extends Problem {
 
-	int noPhotos;
-	List<Photo> photos = new ArrayList<Photo>();
+	public int noPhotos;
+	public List<Photo> photos = new ArrayList<Photo>();
 
-	public PhotoProblem() {
+	public SlideshowProblem() {
 		super();
 	}
 
-	public PhotoProblem(int noPhotos, List<Photo> photos) {
+	public SlideshowProblem(int noPhotos, List<Photo> photos) {
 		super();
 		this.noPhotos = noPhotos;
 		this.photos = photos;
