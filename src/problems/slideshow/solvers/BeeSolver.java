@@ -17,11 +17,9 @@ import template.Solver;
 
 public class BeeSolver extends Solver implements SlideshowSolver {
 
-	final int LOOKAHEAD = 1;
+	final int LOOKAHEAD = 500;
 
 	public SlideshowSolution solve(SlideshowProblem problem) {
-
-		System.out.println("Number of V photos: "+problem.photos.parallelStream().filter(s -> s.orientation == Orientation.V).count());
 
 		// turn all H photos into slides
 		List<Slide> slides = problem.photos.parallelStream().filter(x -> x.orientation == Orientation.H)
@@ -45,7 +43,7 @@ public class BeeSolver extends Solver implements SlideshowSolver {
 		}
 
 		List<Slide> finalSlides = new ArrayList<Slide>();
-		Slide slide = slides.remove(0);
+		Slide slide = slides.remove(slides.size() - 1);
 		finalSlides.add(slide);
 		while (!slides.isEmpty()) {
 			System.out.println(slides.size());
@@ -71,7 +69,8 @@ public class BeeSolver extends Solver implements SlideshowSolver {
 				}
 			}
 			if (bestCandidate == null || slide == bestCandidate) {
-				bestCandidate = slides.get(0);
+				// take the worst slide (low tag size) first if you cannot find a proper one
+				bestCandidate = slides.get(slides.size() - 1);
 			}
 
 			finalSlides.add(bestCandidate);

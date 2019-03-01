@@ -7,17 +7,16 @@ import problems.slideshow.SlideshowParser;
 import problems.slideshow.SlideshowProblem;
 import problems.slideshow.SlideshowSolution;
 import problems.slideshow.SlideshowWriter;
+import problems.slideshow.solvers.BeeSolver;
 import problems.slideshow.solvers.SlideshowSolver;
-import problems.slideshow.solvers.SlideshowSolver2;
 
 public class SingleSolverSingleProblem {
 
 	public static void main(String[] args) throws Exception {
 
-		Path input = Conf.eInput;
-		Path output = Conf.eOutput;
-//		SlideshowSolver solver = new BeeSolver();
-		SlideshowSolver solver = new SlideshowSolver2();
+		Path input = Conf.bInput;
+		Path output = Conf.bOutput;
+		SlideshowSolver solver = new BeeSolver();
 
 		System.out.println(solver.getClass().toString());
 		long start = System.nanoTime();
