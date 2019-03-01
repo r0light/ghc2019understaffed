@@ -16,9 +16,9 @@ public class Conf {
 		Map<Path, Path> files = new HashMap<Path, Path>();
 		files.put(Paths.get(folder + "a_example.txt"), Paths.get(folder + "a_example.out"));
 		files.put(Paths.get(folder + "b_lovely_landscapes.txt"), Paths.get(folder + "b_lovely_landscapes.out"));
-		files.put(Paths.get(folder + "c_memorable_moments.txt"), Paths.get(folder + "c_memorable_moments.out"));
-		files.put(Paths.get(folder + "d_pet_pictures.txt"), Paths.get(folder + "d_pet_pictures.out"));
-		files.put(Paths.get(folder + "e_shiny_selfies.txt"), Paths.get(folder + "e_shiny_selfies.out"));
+//		files.put(Paths.get(folder + "c_memorable_moments.txt"), Paths.get(folder + "c_memorable_moments.out"));
+//		files.put(Paths.get(folder + "d_pet_pictures.txt"), Paths.get(folder + "d_pet_pictures.out"));
+//		files.put(Paths.get(folder + "e_shiny_selfies.txt"), Paths.get(folder + "e_shiny_selfies.out"));
 		return files;
 	}
 
