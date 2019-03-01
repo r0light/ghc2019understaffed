@@ -18,6 +18,8 @@ public class SlideshowSolver2 extends Solver implements SlideshowSolver {
 
 	public SlideshowSolution solve(SlideshowProblem problem) {
 
+		final int inspectVnextElements = 25;
+
 		// turn all H photos into slides
 		List<Slide> Hslides = problem.photos.stream().filter(x -> x.orientation == Orientation.H).map(x -> {
 			List<Photo> photos = new ArrayList<Photo>();
@@ -26,30 +28,32 @@ public class SlideshowSolver2 extends Solver implements SlideshowSolver {
 			return s;
 		}).collect(Collectors.toList());
 
+		// turn all V photos into slides
 		List<Photo> Vphotos = problem.photos.stream().filter(x -> x.orientation == Orientation.V)
 				.collect(Collectors.toList());
 		assert Vphotos.size() % 2 == 0;
 
-		List<Photo> vPhotoCopy = new ArrayList<Photo>(Vphotos);
+		// two V photos are a good match if they 
 		List<Slide> Vslides = new ArrayList<Slide>();
-		while (!vPhotoCopy.isEmpty()) {
-			Photo p1 = vPhotoCopy.get(0);
-			vPhotoCopy.remove(0);
+		while (!Vphotos.isEmpty()) {
+			Photo photo = Vphotos.remove(0);
 			int currentIntersect = Integer.MAX_VALUE;
-			Photo p2 = vPhotoCopy.get(new Random().nextInt(vPhotoCopy.size()));
-			for (int i = 0; i < 50; i++) {
-				Photo p3 = vPhotoCopy.get(new Random().nextInt(vPhotoCopy.size()));
-				List<String> intersect = new ArrayList<String>(p1.tags);
-				intersect.retainAll(p3.tags);
-				if (intersect.size() / (p1.tags.size() + p3.tags.size()) < currentIntersect) {
-					p2 = p3;
+			Photo bestPartner = Vphotos.get(0);
+			for (int i = 0; i < inspectVnextElements && i < Vphotos.size(); i++) {
+				Photo somePartner = Vphotos.get(new Random().nextInt(Vphotos.size()));
+				List<String> intersect = new ArrayList<String>(photo.tags);
+				intersect.retainAll(somePartner.tags);
+				if (intersect.size() / (photo.tags.size() * somePartner.tags.size()) < currentIntersect) {
+					bestPartner = somePartner;
 					currentIntersect = intersect.size();
 				}
 			}
-			Slide s = new Slide(Arrays.asList(p1, p2));
-			vPhotoCopy.remove(p2);
-			Vslides.add(s);
+			Slide slide = new Slide(Arrays.asList(photo, bestPartner));
+			Vphotos.remove(bestPartner);
+			Vslides.add(slide);
 		}
+
+		// properly merge Vslides and Hslides
 
 		SlideshowSolution sol = new SlideshowSolution();
 		List<Slide> slides = new ArrayList<Slide>(Vslides);
