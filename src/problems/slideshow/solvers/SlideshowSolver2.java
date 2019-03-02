@@ -19,8 +19,8 @@ public class SlideshowSolver2 extends Solver implements SlideshowSolver {
 
 	public SlideshowSolution solve(SlideshowProblem problem) {
 
-		final int inspectVnextElements = 400; // 400
-		final int inspectnextSlides = 3000; // 2000
+		final int inspectVnextElements = 2000;
+		final int inspectnextSlides = 3000;
 
 		// turn all H photos into slides
 		List<Slide> Hslides = problem.photos.parallelStream().filter(x -> x.orientation == Orientation.H).map(x -> {
@@ -46,16 +46,15 @@ public class SlideshowSolver2 extends Solver implements SlideshowSolver {
 		List<Slide> Vslides = new ArrayList<Slide>();
 		while (!Vphotos.isEmpty()) {
 			System.out.println(Vphotos.size());
-			Photo photo = Vphotos.remove(0);
+			Photo photo = Vphotos.remove(Vphotos.size() - 1);
 			int currentIntersect = Integer.MAX_VALUE;
 			Photo bestPartner = Vphotos.get(0);
 			for (int i = 0; i < inspectVnextElements && i < Vphotos.size(); i++) {
 				Photo somePartner = Vphotos.get(i);
 				List<String> intersect = new ArrayList<String>(photo.tags);
 				intersect.retainAll(somePartner.tags);
-				// if (intersect.size() / (photo.tags.size() + somePartner.tags.size()) <
-				// currentIntersect) {
-				if (intersect.size() < currentIntersect) {
+				int someScore = intersect.size();
+				if (someScore < currentIntersect) {
 					bestPartner = somePartner;
 					currentIntersect = intersect.size();
 				}

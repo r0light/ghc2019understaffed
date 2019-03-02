@@ -16,7 +16,7 @@ import problems.slideshow.SlideshowProblem;
 import problems.slideshow.SlideshowSolution;
 import template.Solver;
 
-public class BeeSolver extends Solver implements SlideshowSolver {
+public class EveeSolver extends Solver implements SlideshowSolver {
 
 	final int SLIDE_LOOKAHEAD = 500;
 	final int V_LOOKAHEAD = 500;
@@ -56,7 +56,7 @@ public class BeeSolver extends Solver implements SlideshowSolver {
 		Slide slide = slides.remove(slides.size() - 1);
 		finalSlides.add(slide);
 		while (!slides.isEmpty()) {
-			System.out.println("slides: " + slides.size());
+			System.out.println(slides.size());
 			List<Slide> candidates = new ArrayList<Slide>();
 			slide.tags.forEach(t -> candidates.addAll(tag2slides.get(t)));
 			candidates.retainAll(slides);
@@ -106,7 +106,6 @@ public class BeeSolver extends Solver implements SlideshowSolver {
 		});
 
 		while (!Vphotos.isEmpty()) {
-			System.out.println("Vphotos: " + Vphotos.size());
 			Photo photo = Vphotos.remove(Vphotos.size() - 1);
 			int currentScore = Integer.MAX_VALUE;
 			Photo bestPartner = Vphotos.get(0);
