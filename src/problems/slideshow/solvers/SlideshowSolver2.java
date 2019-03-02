@@ -32,7 +32,6 @@ public class SlideshowSolver2 extends Solver implements SlideshowSolver {
 
 		// turn all V photos into slides
 		List<Photo> Vphotos = problem.photos.parallelStream().filter(x -> x.orientation == Orientation.V)
-				// .limit(10000)
 				.collect(Collectors.toList());
 		assert Vphotos.size() % 2 == 0;
 		// sort Vphotos by the number of tags
@@ -83,7 +82,7 @@ public class SlideshowSolver2 extends Solver implements SlideshowSolver {
 		finalSlides.add(slide);
 		while (!slides.isEmpty()) {
 			System.out.println("slides: " + slides.size());
-			Slide bestSlide = slides.get(0);
+			Slide bestSlide = slides.get(slides.size() - 1);
 			int bestScore = SlideshowHelper.score(slide, bestSlide);
 			for (int i = 0; i < inspectnextSlides && i < slides.size(); i++) {
 				Slide someSlide = slides.get(i);
