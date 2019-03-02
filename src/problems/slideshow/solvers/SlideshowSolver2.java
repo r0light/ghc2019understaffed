@@ -19,7 +19,7 @@ public class SlideshowSolver2 extends Solver implements SlideshowSolver {
 
 	public SlideshowSolution solve(SlideshowProblem problem) {
 
-		final int inspectVnextElements = 2000;
+		final int inspectVnextElements = 4000;
 		final int inspectnextSlides = 5000;
 
 		// turn all H photos into slides
@@ -32,6 +32,7 @@ public class SlideshowSolver2 extends Solver implements SlideshowSolver {
 
 		// turn all V photos into slides
 		List<Photo> Vphotos = problem.photos.parallelStream().filter(x -> x.orientation == Orientation.V)
+				// .limit(10000)
 				.collect(Collectors.toList());
 		assert Vphotos.size() % 2 == 0;
 		// sort Vphotos by the number of tags
