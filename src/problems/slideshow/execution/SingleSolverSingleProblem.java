@@ -7,8 +7,8 @@ import problems.slideshow.SlideshowParser;
 import problems.slideshow.SlideshowProblem;
 import problems.slideshow.SlideshowSolution;
 import problems.slideshow.SlideshowWriter;
-import problems.slideshow.solvers.EveeSolver;
 import problems.slideshow.solvers.SlideshowSolver;
+import problems.slideshow.solvers.SlideshowSolver2;
 
 public class SingleSolverSingleProblem {
 
@@ -16,7 +16,7 @@ public class SingleSolverSingleProblem {
 
 		Path input = Conf.eInput;
 		Path output = Conf.eOutput;
-		SlideshowSolver solver = new EveeSolver();
+		SlideshowSolver solver = new SlideshowSolver2();
 
 		System.out.println(solver.getClass().toString());
 		long start = System.nanoTime();
