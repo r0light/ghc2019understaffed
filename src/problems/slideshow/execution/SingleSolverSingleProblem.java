@@ -8,15 +8,15 @@ import problems.slideshow.SlideshowProblem;
 import problems.slideshow.SlideshowSolution;
 import problems.slideshow.SlideshowWriter;
 import problems.slideshow.solvers.SlideshowSolver;
-import problems.slideshow.solvers.SlideshowSolver2;
+import problems.slideshow.solvers.SlideshowSolver1;
 
 public class SingleSolverSingleProblem {
 
 	public static void main(String[] args) throws Exception {
 
-		Path input = Conf.eInput;
-		Path output = Conf.eOutput;
-		SlideshowSolver solver = new SlideshowSolver2();
+		Path input = Conf.dInput;
+		Path output = Conf.dOutput;
+		SlideshowSolver solver = new SlideshowSolver1();
 
 		System.out.println(solver.getClass().toString());
 		long start = System.nanoTime();

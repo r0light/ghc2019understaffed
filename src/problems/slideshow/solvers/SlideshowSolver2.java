@@ -82,7 +82,7 @@ public class SlideshowSolver2 extends Solver implements SlideshowSolver {
 		finalSlides.add(slide);
 		while (!slides.isEmpty()) {
 			System.out.println("slides: " + slides.size());
-			Slide bestSlide = slides.get(slides.size() - 1);
+			Slide bestSlide = slides.get(0);
 			int bestScore = SlideshowHelper.score(slide, bestSlide);
 			for (int i = 0; i < inspectnextSlides && i < slides.size(); i++) {
 				Slide someSlide = slides.get(i);
