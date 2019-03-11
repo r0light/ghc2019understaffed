@@ -1,4 +1,4 @@
-# ghc2019understaffed
+# Google HashCode 2019 – team understaffed
 
 ![logo.png](logo.png)
 
